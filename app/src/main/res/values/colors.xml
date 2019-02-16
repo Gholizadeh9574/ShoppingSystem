@@ -1,0 +1,13 @@
+<?xml version="1.1" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#303F9F</color>
+    <color name="edittextwarning">#64ff5349</color>
+    <color name="cardcolorfullstock">#b0e8a8</color>
+    <color name="cardcoloremptystok">#a96060</color>
+    <color name="white">#efefef</color>
+    <color name="textviewwarnning">#FA2248</color>
+    <color name="textgreen">#38a91f</color>
+    <color name="cardbacground">#fff8ac</color>
+</resources>

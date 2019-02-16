@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:gravity="right"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WareDetails">
+<LinearLayout
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/waredetails_warenametext"
+        android:layout_width="200dp"
+        android:singleLine="true"
+        android:textSize="25sp"
+        android:maxLength="20"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="نام کالا : "
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/waredetails_waregrouptv"
+            android:text="GROUP"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="3"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/waredetails_wareIDtv"
+            android:text="WARE.ID"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="right"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="right"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:text=" تومان"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/waredetails_warepricetext"
+            android:singleLine="true"
+            android:maxLength="7"
+            android:inputType="number"
+            android:gravity="right"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:text="قیمت : "
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/waredetails_salesamounttv"
+        android:text="SALSE AMOUNT"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+<LinearLayout
+    android:layout_marginTop="25dp"
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/waredetails_instocknumtext"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:inputType="number"
+        android:layout_width="50dp"
+        android:gravity="right"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="تعداد در انبار : "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/waredetails_inholdtv"
+        android:text="INHOLD"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/waredetails_saveChangesbutton"
+            android:text="@string/confirmchanges"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textgreen"
+            android:background="@color/cardcolorfullstock"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

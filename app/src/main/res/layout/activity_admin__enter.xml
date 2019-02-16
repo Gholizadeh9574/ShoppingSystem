@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    tools:context=".Admin_Enter">
+
+
+    <TextView
+        android:text="@string/adminenter"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/enteradminaccountname"
+            android:hint="@string/id"
+            android:gravity="center"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="20dp"
+            android:singleLine="true"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/entryadminpassword"
+            android:hint="@string/password"
+            android:gravity="center"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="20dp"
+            android:singleLine="true"
+            android:maxLength="8"
+            android:inputType="numberPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/adminnotactiv"
+            android:text="@string/notallow"
+            android:textColor="@color/textviewwarnning"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/enteradnimbutton"
+            android:text="@string/enter"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

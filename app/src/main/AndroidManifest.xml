@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="amirhosssein.shoppingsystem">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Account_Panel" />
+        <activity android:name=".Admin_Enter" />
+        <activity android:name=".Admin_Panel" />
+        <activity android:name=".Forget_Password" />
+        <activity android:name=".Register" />
+        <activity android:name=".CustomerFirstPage" />
+        <activity android:name=".SingleOrder" />
+        <activity android:name=".CartForCus" />
+        <activity android:name=".CartsForAdmins" />
+        <activity android:name=".CartDetails" />
+        <activity android:name=".WaresInfo" />
+        <activity android:name=".WareDetails" />
+        <activity android:name=".CustomersList" />
+        <activity android:name=".CustomerDetails" />
+        <activity android:name=".CustomerCarts" />
+        <activity android:name=".CustomerCartDetails" />
+        <activity android:name=".AdminsList" />
+        <activity android:name=".AdminDetails" />
+        <activity android:name=".NewAdmin" />
+        <activity android:name=".AdminAccountPanel" />
+        <activity android:name=".NewWare"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/omnu_cart"
+        android:title="@string/cart"
+        android:icon="@drawable/cart_white_icon"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/omnu_accountpanel"
+        android:title="@string/accountpanel"
+        android:icon="@drawable/profile_icon_white"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/omnu_customercarts"
+        android:title="وضعیت سفارشات"
+        android:icon="@drawable/report_icon_white"
+        app:showAsAction="always"
+        />
+
+
+</menu>

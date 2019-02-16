@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SingleOrder">
+
+    <TextView
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="@string/singleorderinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/so_warename"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="XXX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="3dp"
+            android:text="@string/warename"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/so_quantitytext"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="3"
+            android:text="1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/quantity"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/so_sumpricetv"
+        android:text="XXX"
+        android:textColor="@color/textgreen"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/addorderbtn"
+        android:layout_marginTop="50dp"
+        android:text="@string/addorder"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/textgreen"
+        android:background="@color/cardcolorfullstock"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

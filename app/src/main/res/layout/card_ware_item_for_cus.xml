@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/wareforcuscard"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/cardcolorfullstock"
+    app:cardCornerRadius="20dp"
+    android:elevation="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_gravity="right"
+            android:text="XXXX"
+            android:id="@+id/cardwarenametv"
+            android:layout_marginRight="20dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cardwarepricetv"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/price"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cardwarestocktv"
+                android:textStyle="bold"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/stock"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</android.support.v7.widget.CardView>

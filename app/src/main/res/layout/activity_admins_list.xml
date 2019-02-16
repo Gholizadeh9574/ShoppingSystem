@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminsList">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+
+        <TextView
+            android:text="لیست مدیران"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/adminlist_recy"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="60dp"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/adminlist_newadminbtn"
+            android:text="افزودن مدیر جدید"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textgreen"
+            android:background="@color/cardcolorfullstock"
+            android:layout_marginTop="10dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>

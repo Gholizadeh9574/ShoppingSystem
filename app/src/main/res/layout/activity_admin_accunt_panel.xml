@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_margin="5dp"
+    tools:context=".Account_Panel">
+
+
+    <TextView
+        android:id="@+id/adminaccpanel_adminIDtv"
+        android:text="XXXXXX"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/adminaccpanel_newlastnametext"
+            android:hint="@string/lastname"
+            android:singleLine="true"
+            android:maxLength="18"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/adminaccpanel_newnametext"
+            android:hint="@string/name"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/adminaccpanel_repasstext"
+            android:hint="@string/repeatnewpass"
+            android:maxLength="8"
+            android:singleLine="true"
+            android:inputType="numberPassword"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/adminaccpanel_passtext"
+            android:hint="@string/newpass"
+            android:maxLength="8"
+            android:singleLine="true"
+            android:inputType="numberPassword"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/adminaccpanel_passERROR"
+        android:text="@string/repeatpasserror"
+        android:textColor="@color/textviewwarnning"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/adminaccpanel_savecahngebtn"
+        android:text="@string/confirmchanges"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/adminaccpanel_deletaccountbtn"
+        android:text="@string/deletaccount"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
