@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import amirhosssein.shoppingsystem.adaptor.CustomerCartsAdaptor;
 import amirhosssein.shoppingsystem.database.CartsDB;
+import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Carts;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
@@ -22,16 +23,15 @@ public class CustomerCarts extends AppCompatActivity {
     RecyclerView recyclerView;
     CustomerCartsAdaptor adaptor;
     ArrayList<Carts> list;
-
     CartsDB cartsDB=new CartsDB(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_carts);
-        Customer customer= (Customer) getIntent().getSerializableExtra("customer");
+        int enterCusID=getIntent().getIntExtra("customerID",0);
 
-        list=cartsDB.getAllCloseCartsByCustomerID(customer.getID());
+        list=cartsDB.getAllCloseCartsByCustomerID(enterCusID);
         recyclerView=findViewById(R.id.customercarts_recy);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adaptor=new CustomerCartsAdaptor(context,list);
@@ -42,7 +42,7 @@ public class CustomerCarts extends AppCompatActivity {
             public void onItemClick(View view, int position, Object data) {
                 Carts cart=list.get(position);
                 Intent intent =new Intent(context,CustomerCartDetails.class);
-                intent.putExtra("cart",cart);
+                intent.putExtra("cartID",cart.getID());
                 startActivity(intent);
             }
         });

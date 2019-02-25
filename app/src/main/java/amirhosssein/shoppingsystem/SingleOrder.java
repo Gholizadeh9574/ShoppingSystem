@@ -36,7 +36,7 @@ public class SingleOrder extends AppCompatActivity {
     OrdersDB ordersDB = new OrdersDB(context);
     WareDB wareDB=new WareDB(context);
     Ware ware;
-    Customer customer;
+    int enterCusID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SingleOrder extends AppCompatActivity {
         setContentView(R.layout.activity_single_order);
 
         ware = (Ware) getIntent().getSerializableExtra("ware");
-        customer = (Customer) getIntent().getSerializableExtra("customer");
+        enterCusID=getIntent().getIntExtra("customerID",0);
         warename = findViewById(R.id.so_warename);
         sumprice = findViewById(R.id.so_sumpricetv);
         reqQuantitytext = findViewById(R.id.so_quantitytext);
@@ -146,7 +146,7 @@ public class SingleOrder extends AppCompatActivity {
     }
 
     private void addOrderToDatabase() {
-        int cartID = cartDB.getOpenCartIDByCustomerID(customer.getID());
+        int cartID = cartDB.getOpenCartIDByCustomerID(enterCusID);
         Orders order = ordersDB.getOrder_WareInCart(cartID, ware.getID());
         if (order.getID() == 0) {
             Orders order1 = new Orders();

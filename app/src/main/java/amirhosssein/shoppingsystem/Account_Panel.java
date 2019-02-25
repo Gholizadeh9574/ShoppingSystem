@@ -14,27 +14,47 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Customer;
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 
 import static android.view.View.VISIBLE;
 
 
 public class Account_Panel extends AppCompatActivity {
+    @BindView(R.id.renewaccountnametext)
+    EditText accountNametext;
+    @BindView(R.id.renewnametext)
+    EditText nametext;
+    @BindView(R.id.renewlastnametext)
+    EditText lastNametext;
+    @BindView(R.id.renewphonetext)
+    EditText phonetext;
+    @BindView(R.id.renewaddresstext)
+    EditText addresstext;
+    @BindView(R.id.renewpasswordtext)
+    EditText passtext;
+    @BindView(R.id.rerepeatpasswordtext)
+    EditText repeatPasstext;
 
-    Context context=this;
+    Context context = this;
     Customer customer;
-    CustomersDB customersDB=new CustomersDB(context);
-    EditText accountNametext,nametext,lastNametext,phonetext,addresstext,passtext,repeatPasstext;
-    Button saveChangesbtn,deletAccountbtn;
-    TextView accuntNameERRORtv,repeatPassERRORtv;
+    CustomersDB customersDB = new CustomersDB(context);
+    Button saveChangesbtn, deletAccountbtn;
+    TextView accuntNameERRORtv, repeatPassERRORtv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account__panel);
-        customer= (Customer) getIntent().getSerializableExtra("customer");
+        int enterCusID = getIntent().getIntExtra("customerID", 0);
+        customer = customersDB.getCustomerByID(enterCusID);
 
+        ButterKnife.bind(this);
         castAndFind();
 
         accountNametext.setText(customer.getAccount_name());
@@ -48,8 +68,8 @@ public class Account_Panel extends AppCompatActivity {
         phonetext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!phonetext.getText().toString().isEmpty()){
-                    if (!phonetext.getText().toString().startsWith("09") || phonetext.getText().toString().length()!=11){
+                if (!phonetext.getText().toString().isEmpty()) {
+                    if (!phonetext.getText().toString().startsWith("09") || phonetext.getText().toString().length() != 11) {
                         phonetext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
                         Toast.makeText(context, getResources().getString(R.string.phoneerror), Toast.LENGTH_SHORT).show();
                     }
@@ -95,8 +115,8 @@ public class Account_Panel extends AppCompatActivity {
         passtext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!passtext.getText().toString().isEmpty()){
-                    if (passtext.getText().toString().length()<4) {
+                if (!passtext.getText().toString().isEmpty()) {
+                    if (passtext.getText().toString().length() < 4) {
                         passtext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
                         Toast.makeText(context, getResources().getString(R.string.passleghterror), Toast.LENGTH_LONG).show();
                     }
@@ -110,7 +130,7 @@ public class Account_Panel extends AppCompatActivity {
 
                 if (!repeatPasstext.getText().toString().isEmpty()) {
                     if (!repeatPasstext.getText().toString().equals(passtext.getText().toString()))
-                    repeatPassERRORtv.setVisibility(VISIBLE);
+                        repeatPassERRORtv.setVisibility(VISIBLE);
                 }
             }
         });
@@ -146,7 +166,7 @@ public class Account_Panel extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String accountname=accountNametext.getText().toString();
+                String accountname = accountNametext.getText().toString();
                 if (!accountname.isEmpty()) {
                     boolean isExists = customersDB.isAccountNameUsed(accountname);
                     if (isExists)
@@ -210,7 +230,7 @@ public class Account_Panel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (accountNametext.getText().toString().isEmpty() ||
-                        accuntNameERRORtv.getVisibility()==VISIBLE)
+                        accuntNameERRORtv.getVisibility() == VISIBLE)
                     accountNametext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
                 else if (nametext.getText().toString().isEmpty())
                     nametext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
@@ -224,12 +244,12 @@ public class Account_Panel extends AppCompatActivity {
                     passtext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
                 else if (repeatPasstext.getText().toString().isEmpty())
                     repeatPasstext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
-                else if (passtext.getText().toString().length()<4)
+                else if (passtext.getText().toString().length() < 4)
                     Toast.makeText(context, getResources().getString(R.string.passleghterror), Toast.LENGTH_SHORT).show();
-                else if (repeatPassERRORtv.getVisibility()== VISIBLE)
+                else if (repeatPassERRORtv.getVisibility() == VISIBLE)
                     Toast.makeText(context, getResources().getString(R.string.entercorrctlyrepass), Toast.LENGTH_SHORT).show();
-                else{
-                    Customer newcustomer=new Customer();
+                else {
+                    Customer newcustomer = new Customer();
                     newcustomer.setID(customer.getID());
                     newcustomer.setAccount_name(accountNametext.getText().toString());
                     newcustomer.setName(nametext.getText().toString());
@@ -238,13 +258,13 @@ public class Account_Panel extends AppCompatActivity {
                     newcustomer.setPhone(phonetext.getText().toString());
                     newcustomer.setIsactive(true);
                     newcustomer.setPassword(passtext.getText().toString());
-                    customersDB.update(newcustomer,customer.getID());
+                    customersDB.update(newcustomer, customer.getID());
 
                     changedialog();
 
                 }
 
-                }
+            }
         });
 
         deletAccountbtn.setOnClickListener(new View.OnClickListener() {
@@ -259,23 +279,17 @@ public class Account_Panel extends AppCompatActivity {
     }
 
 
+    private void castAndFind() {
 
-    private void castAndFind(){
-        accountNametext=findViewById(R.id.renewaccountnametext);
-        nametext=findViewById(R.id.renewnametext);
-        lastNametext=findViewById(R.id.renewlastnametext);
-        phonetext=findViewById(R.id.renewphonetext);
-        addresstext=findViewById(R.id.renewaddresstext);
-        passtext=findViewById(R.id.renewpasswordtext);
-        repeatPasstext=findViewById(R.id.rerepeatpasswordtext);
-        saveChangesbtn=findViewById(R.id.changeccountdetailsbutton);
-        deletAccountbtn=findViewById(R.id.deletaccounbutton);
-        accuntNameERRORtv=findViewById(R.id.reaccontnamewarning);
-        repeatPassERRORtv=findViewById(R.id.acpanel_passERRORtv);
+
+        saveChangesbtn = findViewById(R.id.changeccountdetailsbutton);
+        deletAccountbtn = findViewById(R.id.deletaccounbutton);
+        accuntNameERRORtv = findViewById(R.id.reaccontnamewarning);
+        repeatPassERRORtv = findViewById(R.id.acpanel_passERRORtv);
     }
 
-    private void changedialog(){
-        AlertDialog.Builder myAlertDialog=new AlertDialog.Builder(context);
+    private void changedialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
         myAlertDialog.setTitle(getResources().getString(R.string.chengeisdone));
         myAlertDialog.setCancelable(false);
         myAlertDialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -285,12 +299,12 @@ public class Account_Panel extends AppCompatActivity {
             }
         });
 
-        final AlertDialog alertDialog=myAlertDialog.create();
+        final AlertDialog alertDialog = myAlertDialog.create();
         alertDialog.show();
     }
 
-    private void deletAccountDialog(){
-        AlertDialog.Builder myAlertDialog=new AlertDialog.Builder(context);
+    private void deletAccountDialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
         myAlertDialog.setTitle(getResources().getString(R.string.deletaccountwarnning));
         myAlertDialog.setCancelable(true);
         myAlertDialog.setPositiveButton(getResources().getString(R.string.ok), null);
@@ -319,7 +333,6 @@ public class Account_Panel extends AppCompatActivity {
 
         alertDialog.show();
     }
-
 
 
 }

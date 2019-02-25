@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import amirhosssein.shoppingsystem.adaptor.CusWareRecyclerAdaptor;
+import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.database.WareDB;
 import amirhosssein.shoppingsystem.database.WareGroupDB;
 import amirhosssein.shoppingsystem.models.Customer;
@@ -33,7 +34,7 @@ public class CustomerFirstPage extends AppCompatActivity {
     Customer customer;
     WareGroupDB wareGroupDB=new WareGroupDB(context);
     WareDB wareDB =new WareDB(context);
-    String TAG="MyApp";
+    CustomersDB customersDB=new CustomersDB(context);
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,24 +45,30 @@ public class CustomerFirstPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent intent=new Intent();
+        Intent intent;
         switch (item.getItemId()){
             case R.id.omnu_cart:
                 intent=new Intent(context,CartForCus.class);
-                intent.putExtra("customer",customer);
+                intent.putExtra("customerID",customer.getID());
                 startActivity(intent);
                 break;
             case R.id.omnu_accountpanel:
                 intent=new Intent(context,Account_Panel.class);
-                intent.putExtra("customer",customer);
+                intent.putExtra("customerID",customer.getID());
                 startActivityForResult(intent,2);
                 break;
             case R.id.omnu_customercarts:
                 intent=new Intent(context , CustomerCarts.class);
-                intent.putExtra("customer",customer);
+                intent.putExtra("customerID",customer.getID());
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        customer=customersDB.getCustomerByID(customer.getID());
     }
 
     @Override
@@ -69,7 +76,8 @@ public class CustomerFirstPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_first_page);
         setTitle(getResources().getString(R.string.search));
-        customer= (Customer) getIntent().getSerializableExtra("customer");
+        int enterCusID=getIntent().getIntExtra("customerID",0);
+        customer=customersDB.getCustomerByID(enterCusID);
         wareGroupNames=wareGroupDB.getAllWareGroupName();
         wareList=wareDB.getAllWaresforCus();
         recyclerView=findViewById(R.id.cuswarerecycler);
@@ -98,7 +106,7 @@ public class CustomerFirstPage extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position, Object data) {
                         Ware ware =wareList.get(position);
                         Intent intent=new Intent(CustomerFirstPage.this , SingleOrder.class);
-                        intent.putExtra("customer",customer);
+                        intent.putExtra("customerID",customer.getID());
                         intent.putExtra("ware",ware);
                         startActivity(intent);
                     }
@@ -119,7 +127,7 @@ public class CustomerFirstPage extends AppCompatActivity {
                 Ware ware =wareList.get(position);
                 Toast.makeText(context, "Click : "+position, Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context , SingleOrder.class);
-                intent.putExtra("customer",customer);
+                intent.putExtra("customerID",customer.getID());
                 intent.putExtra("ware",ware);
                 startActivity(intent);
             }

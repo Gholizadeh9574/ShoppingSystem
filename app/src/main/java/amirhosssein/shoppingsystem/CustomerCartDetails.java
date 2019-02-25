@@ -28,20 +28,19 @@ public class CustomerCartDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_cart_details);
-        Carts cart= (Carts) getIntent().getSerializableExtra("cart");
-
+        int enterCartID=getIntent().getIntExtra("cartID",0);
         cartIDtv=findViewById(R.id.customercartdetails_cartIDtv);
         totalOrderPricetv=findViewById(R.id.customercartdetails_totalorderpricetv);
         recyclerView=findViewById(R.id.customercartdetails_recy);
 
-        cartIDtv.setText("شماره ثبت این سفارش : "+cart.getID());
+        cartIDtv.setText("شماره ثبت این سفارش : "+enterCartID);
 
-        list=ordersDB.getOrderByCartID(cart.getID());
+        list=ordersDB.getOrderByCartID(enterCartID);
         adaptor=new CustomerCartDetailsAdaptor(context,list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
 
-        int totalPrice=ordersDB.getTotalOrderValueByCartID(cart.getID());
+        int totalPrice=ordersDB.getTotalOrderValueByCartID(enterCartID);
         String stringTotalPrice="مبلغ کل این سفارش "+totalPrice+" تومان";
         totalOrderPricetv.setText(stringTotalPrice);
 

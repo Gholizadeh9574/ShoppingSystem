@@ -53,25 +53,20 @@ public class MainActivity extends AppCompatActivity {
                     String accountname = accountnametext.getText().toString();
                     String password = passwordtext.getText().toString();
                     boolean isExists = customersDB.logIn(accountname, password);
-                    Log.d(TAG, "onClick: " + isExists);
                     if (isExists) {
                         Customer customer = customersDB.getCustomerByAccountName(accountname);
 
                         if (customer.isIsactive()) {
-                            Log.i(TAG, "onClick: Active");
                             intent = new Intent(context, CustomerFirstPage.class);
-                            intent.putExtra("customer", customer);
-                            Log.i(TAG, "onClick: after Intent");
+                            intent.putExtra("customerID", customer.getID());
                             startActivity(intent);
                         }
                         else{
-                            Log.i(TAG, "onClick: Active = false");
                             wrongaccoutpass.setText(getResources().getString(R.string.notallow));
                             wrongaccoutpass.setVisibility(View.VISIBLE);
                         }
                     }
                     else{
-                            Log.i(TAG, "onClick: isExists  = false");
                             wrongaccoutpass.setText(getResources().getString(R.string.wrongaccontnameorpass));
                             wrongaccoutpass.setVisibility(View.VISIBLE);
                         }

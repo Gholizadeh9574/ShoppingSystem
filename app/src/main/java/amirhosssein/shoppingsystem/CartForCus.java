@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import amirhosssein.shoppingsystem.adaptor.CartForCusAdaptor;
 import amirhosssein.shoppingsystem.database.CartsDB;
+import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.database.OrdersDB;
 import amirhosssein.shoppingsystem.database.WareDB;
 import amirhosssein.shoppingsystem.models.Carts;
@@ -34,7 +35,8 @@ public class CartForCus extends AppCompatActivity {
     ArrayList<Orders> listOfWareInOrder;
     OrdersDB ordersDB=new OrdersDB(context);
     CartsDB cartDB=new CartsDB(context);
-    WareDB wareDB=new WareDB(this);
+    WareDB wareDB=new WareDB(context);
+    CustomersDB customersDB=new CustomersDB(context);
     Customer customer;
     int cartID;
 
@@ -42,8 +44,9 @@ public class CartForCus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartfor_cus);
-        customer= (Customer) getIntent().getSerializableExtra("customer");
-        cartID = cartDB.getOpenCartIDByCustomerID(customer.getID());
+        int enterCusID=getIntent().getIntExtra("customerID",0);
+        customer=customersDB.getCustomerByID(enterCusID);
+        cartID = cartDB.getOpenCartIDByCustomerID(enterCusID);
         listOfWareInOrder=ordersDB.getOrderByCartID(cartID);
 
         CartForCusAdaptor adaptor=new CartForCusAdaptor(listOfWareInOrder,context);
