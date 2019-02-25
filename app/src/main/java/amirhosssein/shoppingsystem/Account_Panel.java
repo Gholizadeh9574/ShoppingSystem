@@ -40,12 +40,18 @@ public class Account_Panel extends AppCompatActivity {
     EditText passtext;
     @BindView(R.id.rerepeatpasswordtext)
     EditText repeatPasstext;
+    @BindView(R.id.changeccountdetailsbutton)
+    Button saveChangesbtn;
+    @BindView(R.id.deletaccounbutton)
+    Button deletAccountbtn;
+    @BindView(R.id.reaccontnamewarning)
+    TextView accuntNameERRORtv;
+    @BindView(R.id.acpanel_passERRORtv)
+    TextView repeatPassERRORtv;
 
     Context context = this;
     Customer customer;
     CustomersDB customersDB = new CustomersDB(context);
-    Button saveChangesbtn, deletAccountbtn;
-    TextView accuntNameERRORtv, repeatPassERRORtv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,6 @@ public class Account_Panel extends AppCompatActivity {
         customer = customersDB.getCustomerByID(enterCusID);
 
         ButterKnife.bind(this);
-        castAndFind();
 
         accountNametext.setText(customer.getAccount_name());
         nametext.setText(customer.getName());
@@ -278,16 +283,6 @@ public class Account_Panel extends AppCompatActivity {
 
     }
 
-
-    private void castAndFind() {
-
-
-        saveChangesbtn = findViewById(R.id.changeccountdetailsbutton);
-        deletAccountbtn = findViewById(R.id.deletaccounbutton);
-        accuntNameERRORtv = findViewById(R.id.reaccontnamewarning);
-        repeatPassERRORtv = findViewById(R.id.acpanel_passERRORtv);
-    }
-
     private void changedialog() {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
         myAlertDialog.setTitle(getResources().getString(R.string.chengeisdone));
@@ -333,6 +328,5 @@ public class Account_Panel extends AppCompatActivity {
 
         alertDialog.show();
     }
-
 
 }

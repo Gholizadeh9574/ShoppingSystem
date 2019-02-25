@@ -134,14 +134,14 @@ public class AdminDB {
         return isExists;
     }
 
-    public Admin getAdminByID(String adminID){
+    public Admin getAdminByID(int adminID){
         Admin admin =new Admin();
 
         openReadableDatabase();
 
         String sqlstrg="select * from "+AdminDB.TABLE_ADMIN+" where "+
                 AdminDB.COLUMN_ID+" =?";
-        String[] whereArgs={adminID};
+        String[] whereArgs={String.valueOf(adminID)};
         Cursor cursor=db.rawQuery(sqlstrg,whereArgs);
         cursor.moveToFirst();
         admin=getAdminByCursor(cursor);

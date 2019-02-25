@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import amirhosssein.shoppingsystem.adaptor.CartsForAdminsAdaptor;
+import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.database.CartsDB;
 import amirhosssein.shoppingsystem.models.Admin;
 import amirhosssein.shoppingsystem.models.Carts;
@@ -24,11 +25,12 @@ public class CartsForAdmins extends AppCompatActivity {
     ArrayList<Carts> cartsList;
     Context context=this;
     CartsDB cartsDB=new CartsDB(context);
+    AdminDB adminDB=new AdminDB(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Admin admin= (Admin) getIntent().getSerializableExtra("admin");
+        Admin admin=adminDB.getAdminByID(getIntent().getIntExtra("adminID",0));
         setContentView(R.layout.activity_carts_for_admins);
         cartsList=cartsDB.getAllOpenCarts();
         recyclerView=findViewById(R.id.recy_cartsforadmin);

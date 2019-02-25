@@ -13,26 +13,30 @@ import android.widget.TextView;
 
 import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.models.Admin;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class Admin_Enter extends AppCompatActivity {
 
+    @BindView(R.id.enteradminaccountname)
+    EditText adminidtext;
+    @BindView(R.id.entryadminpassword)
+    EditText passtext;
+    @BindView(R.id.enteradnimbutton)
+    Button enter;
+    @BindView(R.id.adminnotactiv)
+    TextView adminNotActive;
+
     Context context=this;
     AdminDB adminDB=new AdminDB(context);
-
-    TextView adminNotActive;
-    EditText adminidtext,passtext;
-    Button enter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__enter);
 
-        adminidtext=findViewById(R.id.enteradminaccountname);
-        passtext=findViewById(R.id.entryadminpassword);
-        enter=findViewById(R.id.enteradnimbutton);
-        adminNotActive =findViewById(R.id.adminnotactiv);
+        ButterKnife.bind(this);
 
         adminidtext.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,10 +84,10 @@ public class Admin_Enter extends AppCompatActivity {
 
                     boolean isExists=adminDB.login(adminID , password);
                     if (isExists){
-                        Admin admin=adminDB.getAdminByID(adminID);
+                        Admin admin=adminDB.getAdminByID(Integer.valueOf(adminID));
                         if (admin.isAcvive()){
                             Intent intent=new Intent(getApplicationContext() , Admin_Panel.class );
-                            intent.putExtra("admin" , admin);
+                            intent.putExtra("adminID" , admin.getID());
                             startActivity(intent);
                         }
                         else {

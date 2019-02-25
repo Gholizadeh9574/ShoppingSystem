@@ -15,16 +15,23 @@ import amirhosssein.shoppingsystem.adaptor.AdminListAdaptor;
 import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.models.Admin;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AdminsList extends AppCompatActivity {
 
-    Context context=this;
+    Context context = this;
     RecyclerView recyclerView;
     AdminListAdaptor adaptor;
     ArrayList<Admin> list;
 
-    AdminDB adminDB=new AdminDB(context);
-    Button newAdminbtn;
+    @OnClick(R.id.adminlist_newadminbtn)
+    void newAdmin() {
+        Intent intent = new Intent(context, NewAdmin.class);
+        startActivity(intent);
+    }
+
+    AdminDB adminDB = new AdminDB(context);
 
     Admin admin;
 
@@ -33,18 +40,10 @@ public class AdminsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admins_list);
 
-        admin= (Admin) getIntent().getSerializableExtra("admin");
+        ButterKnife.bind(this);
+        admin = adminDB.getAdminByID(getIntent().getIntExtra("adminID", 0));
 
-        recyclerView=findViewById(R.id.adminlist_recy);
-        newAdminbtn=findViewById(R.id.adminlist_newadminbtn);
-
-        newAdminbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(context,NewAdmin.class);
-                startActivity(intent);
-            }
-        });
+        recyclerView = findViewById(R.id.adminlist_recy);
 
     }
 
@@ -52,16 +51,15 @@ public class AdminsList extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        list=adminDB.getAllAdminsButCurectByAdminID(admin.getID());
-        adaptor=new AdminListAdaptor(context,list);
+        list = adminDB.getAllAdminsButCurectByAdminID(admin.getID());
+        adaptor = new AdminListAdaptor(context, list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
         adaptor.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, Object data) {
-                Admin admin=list.get(position);
-                Intent intent=new Intent(context,AdminDetails.class);
-                intent.putExtra("admin",admin);
+                Intent intent = new Intent(context, AdminDetails.class);
+                intent.putExtra("adminID", list.get(position).getID());
                 startActivity(intent);
             }
         });

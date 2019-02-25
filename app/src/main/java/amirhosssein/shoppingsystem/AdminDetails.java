@@ -12,13 +12,23 @@ import android.widget.TextView;
 
 import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.models.Admin;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AdminDetails extends AppCompatActivity {
 
 
     Context context=this;
-    TextView adminIDtv , fullNametv;
-    Switch mainAdminswch,isActiveswch;
+
+    @BindView(R.id.admindetails_adminIDtv)
+    TextView adminIDtv;
+    @BindView(R.id.admindetails_fullnametv)
+    TextView fullNametv;
+    @BindView(R.id.admindetails_mainadminswitch)
+    Switch mainAdminswch;
+    @BindView(R.id.admindetails_isactiveswitch)
+    Switch isActiveswch;
+    @BindView(R.id.admindetails_savebtn)
     Button savebtn;
 
     Admin admin;
@@ -30,13 +40,11 @@ public class AdminDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_details);
 
-        admin= (Admin) getIntent().getSerializableExtra("admin");
 
-        adminIDtv=findViewById(R.id.admindetails_adminIDtv);
-        fullNametv =findViewById(R.id.admindetails_fullnametv);
-        mainAdminswch=findViewById(R.id.admindetails_mainadminswitch);
-        isActiveswch=findViewById(R.id.admindetails_isactiveswitch);
-        savebtn=findViewById(R.id.admindetails_savebtn);
+        ButterKnife.bind(this);
+        admin=adminDB.getAdminByID(getIntent().getIntExtra("adminID",0));
+
+
 
         String strgAdminID="شناسه کاربری : "+admin.getID();
         adminIDtv.setText(strgAdminID);
