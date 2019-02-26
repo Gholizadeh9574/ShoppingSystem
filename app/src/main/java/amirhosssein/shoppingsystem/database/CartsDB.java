@@ -64,6 +64,18 @@ public class CartsDB {
         closeDatabase();
     }
 
+    public Carts getCartbyCartID(int cartID){
+        openReadableDatabase();
+        String[] selectArgs={String.valueOf(cartID)};
+        String sqlstrg="select * from "+CartsDB.TABLE_CARTS+" where "+CartsDB.COLUMN_ID+" =?";
+        Cursor cursor=db.rawQuery(sqlstrg,selectArgs);
+        cursor.moveToFirst();
+        Carts cart =getCartByCursor(cursor);
+        closeDatabase();
+        return cart;
+
+    }
+
     public Carts getOpenCartByCustomerID(int ID){
         openReadableDatabase();
         String[] selectArgs={String.valueOf(ID),String.valueOf(0)};

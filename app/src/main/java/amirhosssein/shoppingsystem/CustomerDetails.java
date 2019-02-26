@@ -11,12 +11,26 @@ import android.widget.TextView;
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.database.OrdersDB;
 import amirhosssein.shoppingsystem.models.Customer;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CustomerDetails extends AppCompatActivity {
 
     Context context=this;
     LinearLayout layout;
-    TextView accountNametv,fullNametv,customerIDtv,phonetv,addresstv,totalbuytv;
+    @BindView(R.id.customerdetails_accountnametv)
+    TextView accountNametv;
+    @BindView(R.id.customerdetails_fullnametv)
+    TextView fullNametv;
+    @BindView(R.id.customerdetails_idtv)
+    TextView customerIDtv;
+    @BindView(R.id.customerdetails_phonetv)
+    TextView phonetv;
+    @BindView(R.id.customerdetails_addresstv)
+    TextView addresstv;
+    @BindView(R.id.customerdetails_totalbuytv)
+    TextView totalbuytv;
+    @BindView(R.id.customerdetails_isactiveswitch)
     Switch aSwitch;
     OrdersDB ordersDB=new OrdersDB(context);
     CustomersDB customersDB=new CustomersDB(context);
@@ -25,16 +39,9 @@ public class CustomerDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
-        final Customer customer= (Customer) getIntent().getSerializableExtra("customer");
+        final Customer customer= customersDB.getCustomerByID(getIntent().getIntExtra("customer",0));
         layout =findViewById(R.id.customerdetails_layout);
-        accountNametv=findViewById(R.id.customerdetails_accountnametv);
-        fullNametv=findViewById(R.id.customerdetails_fullnametv);
-        customerIDtv=findViewById(R.id.customerdetails_idtv);
-        phonetv=findViewById(R.id.customerdetails_phonetv);
-        addresstv=findViewById(R.id.customerdetails_addresstv);
-        totalbuytv=findViewById(R.id.customerdetails_totalbuytv);
-        aSwitch=findViewById(R.id.customerdetails_isactiveswitch);
-
+        ButterKnife.bind(this);
         if (customer.isIsactive()){
             aSwitch.setChecked(true);
             layout.setBackgroundColor(getResources().getColor(R.color.cardcolorfullstock));

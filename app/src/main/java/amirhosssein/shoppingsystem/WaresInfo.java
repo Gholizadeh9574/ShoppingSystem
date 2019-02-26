@@ -15,30 +15,34 @@ import amirhosssein.shoppingsystem.adaptor.WareInfoAdaptor;
 import amirhosssein.shoppingsystem.database.WareDB;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
 import amirhosssein.shoppingsystem.models.Ware;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class WaresInfo extends AppCompatActivity {
 
-    Context context=this;
+    Context context = this;
+    @BindView(R.id.recy_wareinfo)
     RecyclerView recyclerView;
     WareInfoAdaptor adaptor;
     ArrayList<Ware> wareList;
-    WareDB wareDB=new WareDB(context);
+    WareDB wareDB = new WareDB(context);
+    @BindView(R.id.wareinfo_newwarebutton)
     Button newWarebtn;
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        wareList=wareDB.getAllWares();
-        adaptor=new WareInfoAdaptor(context,wareList);
+        wareList = wareDB.getAllWares();
+        adaptor = new WareInfoAdaptor(context, wareList);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
         adaptor.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, Object data) {
-                Ware ware =wareList.get(position);
-                Intent intent =new Intent(context,WareDetails.class);
-                intent.putExtra("ware",ware);
+                Ware ware = wareList.get(position);
+                Intent intent = new Intent(context, WareDetails.class);
+                intent.putExtra("wareID", ware.getID());
                 startActivity(intent);
             }
         });
@@ -48,13 +52,11 @@ public class WaresInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wares_info);
-        recyclerView=findViewById(R.id.recy_wareinfo);
-
-        newWarebtn=findViewById(R.id.wareinfo_newwarebutton);
+        ButterKnife.bind(this);
         newWarebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context,NewWare.class);
+                Intent intent = new Intent(context, NewWare.class);
                 startActivity(intent);
             }
         });

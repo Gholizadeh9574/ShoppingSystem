@@ -28,8 +28,8 @@ public class Admin_Enter extends AppCompatActivity {
     @BindView(R.id.adminnotactiv)
     TextView adminNotActive;
 
-    Context context=this;
-    AdminDB adminDB=new AdminDB(context);
+    Context context = this;
+    AdminDB adminDB = new AdminDB(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,30 +74,28 @@ public class Admin_Enter extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String adminID=adminidtext.getText().toString();
-                String password=passtext.getText().toString();
+                String adminID = adminidtext.getText().toString();
+                String password = passtext.getText().toString();
                 if (adminID.isEmpty())
                     adminidtext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
                 if (password.isEmpty())
                     passtext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
-                if (!adminID.isEmpty()&&!password.isEmpty()){
+                if (!adminID.isEmpty() && !password.isEmpty()) {
 
-                    boolean isExists=adminDB.login(adminID , password);
-                    if (isExists){
-                        Admin admin=adminDB.getAdminByID(Integer.valueOf(adminID));
-                        if (admin.isAcvive()){
-                            Intent intent=new Intent(getApplicationContext() , Admin_Panel.class );
-                            intent.putExtra("adminID" , admin.getID());
+                    boolean isExists = adminDB.login(adminID, password);
+                    if (isExists) {
+                        Admin admin = adminDB.getAdminByID(Integer.valueOf(adminID));
+                        if (admin.isAcvive()) {
+                            Intent intent = new Intent(getApplicationContext(), Admin_Panel.class);
+                            intent.putExtra("adminID", admin.getID());
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             adminNotActive.setText(getResources().getString(R.string.notallow));
                             adminNotActive.setVisibility(View.VISIBLE);
                         }
-                    }
-                    else{
-                     adminNotActive.setText(getResources().getString(R.string.wrongaccontnameorpass));
-                     adminNotActive.setVisibility(View.VISIBLE);
+                    } else {
+                        adminNotActive.setText(getResources().getString(R.string.wrongaccontnameorpass));
+                        adminNotActive.setVisibility(View.VISIBLE);
                     }
                 }
             }

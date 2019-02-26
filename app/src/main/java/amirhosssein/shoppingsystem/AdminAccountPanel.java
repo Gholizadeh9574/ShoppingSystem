@@ -22,12 +22,12 @@ import static android.view.View.VISIBLE;
 
 public class AdminAccountPanel extends AppCompatActivity {
 
-    Context context=this;
+    Context context = this;
     Admin admin;
-    AdminDB adminDB=new AdminDB(context);
+    AdminDB adminDB = new AdminDB(context);
 
     @OnClick(R.id.adminaccpanel_savecahngebtn)
-    public void save(){
+    public void save() {
         if (nametext.getText().toString().isEmpty())
             nametext.setBackgroundColor(getResources().getColor(R.color.edittextwarning));
         else if (lastNametext.getText().toString().isEmpty())
@@ -58,7 +58,7 @@ public class AdminAccountPanel extends AppCompatActivity {
     }
 
     @OnClick(R.id.adminaccpanel_deletaccountbtn)
-    public void delete(){
+    public void delete() {
         deletDialog();
     }
 
@@ -81,7 +81,7 @@ public class AdminAccountPanel extends AppCompatActivity {
         setContentView(R.layout.activity_admin_accunt_panel);
 
         ButterKnife.bind(this);
-        admin =adminDB.getAdminByID(getIntent().getIntExtra("adminID",0));
+        admin = adminDB.getAdminByID(getIntent().getIntExtra("adminID", 0));
 
         String stringAdminID = "شناسه کاربری : " + admin.getID();
         adminIDtv.setText(stringAdminID);
@@ -92,12 +92,12 @@ public class AdminAccountPanel extends AppCompatActivity {
 
     }
 
-    private void deletDialog(){
+    private void deletDialog() {
 
-        AlertDialog.Builder myAlertDialog=new AlertDialog.Builder(context);
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
         myAlertDialog.setTitle(getResources().getString(R.string.deletaccountwarnning));
         myAlertDialog.setCancelable(false);
-        myAlertDialog.setNegativeButton(getResources().getString(R.string.cancel),null);
+        myAlertDialog.setNegativeButton(getResources().getString(R.string.cancel), null);
         myAlertDialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -108,12 +108,12 @@ public class AdminAccountPanel extends AppCompatActivity {
             }
         });
 
-        final AlertDialog alertDialog=myAlertDialog.create();
+        final AlertDialog alertDialog = myAlertDialog.create();
         alertDialog.show();
     }
 
-    private void changedialog(){
-        AlertDialog.Builder myAlertDialog=new AlertDialog.Builder(context);
+    private void changedialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
         myAlertDialog.setTitle(getResources().getString(R.string.chengeisdone));
         myAlertDialog.setCancelable(false);
         myAlertDialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -123,7 +123,7 @@ public class AdminAccountPanel extends AppCompatActivity {
             }
         });
 
-        final AlertDialog alertDialog=myAlertDialog.create();
+        final AlertDialog alertDialog = myAlertDialog.create();
         alertDialog.show();
     }
 }

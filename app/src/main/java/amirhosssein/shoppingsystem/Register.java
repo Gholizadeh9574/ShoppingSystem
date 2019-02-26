@@ -18,13 +18,31 @@ import amirhosssein.shoppingsystem.database.CartsDB;
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Carts;
 import amirhosssein.shoppingsystem.models.Customer;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class Register extends AppCompatActivity {
 
-    String TAG="MyApp";
     Context context =this;
-    EditText accountName , name , lastname , phone , address , newpass , repeatpass;
-    TextView accountnamewarning , passerror;
+    @BindView(R.id.newaccountnametext)
+    EditText accountName;
+    @BindView(R.id.newnametext)
+    EditText name;
+    @BindView(R.id.newlastnametext)
+    EditText lastname;
+    @BindView(R.id.newphonetext)
+    EditText phone;
+    @BindView(R.id.newaddresstext)
+    EditText address;
+    @BindView(R.id.newpasswordtext)
+    EditText newpass;
+    @BindView(R.id.repeatnewpasswordtext)
+    EditText repeatpass;
+    @BindView(R.id.accountnamewarnning)
+    TextView accountnamewarning;
+    @BindView(R.id.passerrorst)
+    TextView passerror;
+    @BindView(R.id.regiterbutton)
     Button registerbutt;
     CustomersDB customersDB =new CustomersDB(context);
     CartsDB cartsDB=new CartsDB(context);
@@ -34,16 +52,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        accountName=findViewById(R.id.newaccountnametext);
-        name=findViewById(R.id.newnametext);
-        lastname=findViewById(R.id.newlastnametext);
-        phone=findViewById(R.id.newphonetext);
-        address=findViewById(R.id.newaddresstext);
-        newpass=findViewById(R.id.newpasswordtext);
-        repeatpass=findViewById(R.id.repeatnewpasswordtext);
-        accountnamewarning=findViewById(R.id.accountnamewarnning);
-        passerror=findViewById(R.id.passerrorst);
-        registerbutt=findViewById(R.id.regiterbutton);
+        ButterKnife.bind(this);
 
         registerbutt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,10 +269,7 @@ public class Register extends AppCompatActivity {
         customer.setAddress(address.getText().toString());
         customer.setPassword(newpass.getText().toString());
         customer.setIsactive(true);
-        Log.d(TAG, "onClick: befor insert ");
         customersDB.insert(customer);
-        Log.d(TAG, "Register onClick : after insert customer");
-
 
         Customer customer1=customersDB.getCustomerByAccountName(customer.getAccount_name());
         Carts cart=new Carts();

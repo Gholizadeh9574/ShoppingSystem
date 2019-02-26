@@ -15,12 +15,14 @@ import amirhosssein.shoppingsystem.adaptor.AdminListAdaptor;
 import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.models.Admin;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AdminsList extends AppCompatActivity {
 
     Context context = this;
+    @BindView(R.id.adminlist_recy)
     RecyclerView recyclerView;
     AdminListAdaptor adaptor;
     ArrayList<Admin> list;
@@ -43,7 +45,7 @@ public class AdminsList extends AppCompatActivity {
         ButterKnife.bind(this);
         admin = adminDB.getAdminByID(getIntent().getIntExtra("adminID", 0));
 
-        recyclerView = findViewById(R.id.adminlist_recy);
+        ButterKnife.bind(this);
 
     }
 

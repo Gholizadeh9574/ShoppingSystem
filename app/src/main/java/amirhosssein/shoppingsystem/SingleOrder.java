@@ -20,13 +20,20 @@ import amirhosssein.shoppingsystem.database.WareDB;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.Orders;
 import amirhosssein.shoppingsystem.models.Ware;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SingleOrder extends AppCompatActivity {
 
 
     Context context = this;
-    TextView warename, sumprice;
+    @BindView(R.id.so_warename)
+    TextView warename;
+    @BindView(R.id.so_sumpricetv)
+    TextView sumprice;
+    @BindView(R.id.so_quantitytext)
     EditText reqQuantitytext;
+    @BindView(R.id.addorderbtn)
     Button addorder;
     int stok;
     int price;
@@ -34,7 +41,7 @@ public class SingleOrder extends AppCompatActivity {
     int requestQuantity;
     CartsDB cartDB = new CartsDB(context);
     OrdersDB ordersDB = new OrdersDB(context);
-    WareDB wareDB=new WareDB(context);
+    WareDB wareDB = new WareDB(context);
     Ware ware;
     int enterCusID;
 
@@ -43,12 +50,9 @@ public class SingleOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_order);
 
-        ware = (Ware) getIntent().getSerializableExtra("ware");
-        enterCusID=getIntent().getIntExtra("customerID",0);
-        warename = findViewById(R.id.so_warename);
-        sumprice = findViewById(R.id.so_sumpricetv);
-        reqQuantitytext = findViewById(R.id.so_quantitytext);
-        addorder = findViewById(R.id.addorderbtn);
+        ware = wareDB.getWareByID(getIntent().getIntExtra("wareID",0));
+        enterCusID = getIntent().getIntExtra("customerID", 0);
+        ButterKnife.bind(this);
         warename.setText(ware.getName());
         sumprice.setText("ارزش سفارش شما : " + ware.getPrice() + " تومان");
         stok = ware.getStock();
@@ -64,10 +68,8 @@ public class SingleOrder extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int orderValue;
                 if (reqQuantitytext.getText().toString().isEmpty()) {
-                    Log.i("MyApp", "onTextChanged: 2222");
                     sumprice.setText("");
                 } else if (stok - Integer.parseInt(reqQuantitytext.getText().toString()) >= 0) {
-                    Log.i("MyApp", "onTextChanged: 1111");
                     int num = Integer.valueOf(reqQuantitytext.getText().toString());
                     orderValue = num * price;
                     sumprice.setTextColor(getResources().getColor(R.color.textgreen));
@@ -155,26 +157,26 @@ public class SingleOrder extends AppCompatActivity {
             finalQuantity = requestQuantity;
             order1.setQuantity(finalQuantity);
             ordersDB.insert(order1);
-            int oldstock=ware.getStock();
-            int newtock=oldstock-finalQuantity;
-            int oldinhold=ware.getInHolding();
-            int newinholding=oldinhold+finalQuantity;
+            int oldstock = ware.getStock();
+            int newtock = oldstock - finalQuantity;
+            int oldinhold = ware.getInHolding();
+            int newinholding = oldinhold + finalQuantity;
             ware.setStock(newtock);
             ware.setInHolding(newinholding);
-            wareDB.update(ware,ware.getID());
+            wareDB.update(ware, ware.getID());
         } else {
             finalQuantity = requestQuantity + order.getQuantity();
             Orders order1 = new Orders(cartID, ware.getID(), finalQuantity);
             ordersDB.update(order1, order.getID());
-            int oldstock=ware.getStock();
-            int newtock=oldstock-finalQuantity;
-            int oldinhold=ware.getInHolding();
-            int newinholding=oldinhold+finalQuantity;
+            int oldstock = ware.getStock();
+            int newtock = oldstock - finalQuantity;
+            int oldinhold = ware.getInHolding();
+            int newinholding = oldinhold + finalQuantity;
             ware.setStock(newtock);
             ware.setInHolding(newinholding);
-            wareDB.update(ware,ware.getID());
+            wareDB.update(ware, ware.getID());
         }
-        wareDB.addRequestQuantityToInHold(ware.getID(),finalQuantity);
+        wareDB.addRequestQuantityToInHold(ware.getID(), finalQuantity);
     }
 }
 

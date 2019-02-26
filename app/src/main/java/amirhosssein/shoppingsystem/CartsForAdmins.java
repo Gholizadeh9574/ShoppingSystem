@@ -17,9 +17,12 @@ import amirhosssein.shoppingsystem.database.CartsDB;
 import amirhosssein.shoppingsystem.models.Admin;
 import amirhosssein.shoppingsystem.models.Carts;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CartsForAdmins extends AppCompatActivity {
 
+    @BindView(R.id.recy_cartsforadmin)
     RecyclerView recyclerView;
     CartsForAdminsAdaptor adaptor;
     ArrayList<Carts> cartsList;
@@ -33,7 +36,7 @@ public class CartsForAdmins extends AppCompatActivity {
         Admin admin=adminDB.getAdminByID(getIntent().getIntExtra("adminID",0));
         setContentView(R.layout.activity_carts_for_admins);
         cartsList=cartsDB.getAllOpenCarts();
-        recyclerView=findViewById(R.id.recy_cartsforadmin);
+        ButterKnife.bind(this);
         adaptor=new CartsForAdminsAdaptor(cartsList,context,admin.getID());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
@@ -43,7 +46,7 @@ public class CartsForAdmins extends AppCompatActivity {
             public void onItemClick(View view, int position, Object data) {
                 Carts cart=cartsList.get(position);
                 Intent intent=new Intent(context,CartDetails.class);
-                intent.putExtra("cart",cart);
+                intent.putExtra("cartID",cart.getID());
                 startActivity(intent);
             }
         });

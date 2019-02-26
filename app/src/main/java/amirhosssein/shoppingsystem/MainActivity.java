@@ -15,15 +15,27 @@ import android.widget.Toast;
 
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Customer;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
     Context context=this;
 
-    String TAG="MyApp";
-    EditText accountnametext,passwordtext;
+    @BindView(R.id.enteraccountname)
+    EditText accountnametext;
+    @BindView(R.id.entrypassword)
+    EditText passwordtext;
+    @BindView(R.id.entercustombutton)
     Button enterbtn;
-    TextView adminenterst,registerst,forgetst,wrongaccoutpass;
+    @BindView(R.id.adminentrytext)
+    TextView adminenterst;
+    @BindView(R.id.regitertext)
+    TextView registerst;
+    @BindView(R.id.forgetpasswordtext)
+    TextView forgetst;
+    @BindView(R.id.wrongaccontpass)
+    TextView wrongaccoutpass;
     Intent intent;
 
     CustomersDB customersDB=new CustomersDB(context);
@@ -33,14 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        accountnametext=findViewById(R.id.enteraccountname);
-        passwordtext=findViewById(R.id.entrypassword);
-        enterbtn=findViewById(R.id.entercustombutton);
-        adminenterst=findViewById(R.id.adminentrytext);
-        registerst=findViewById(R.id.regitertext);
-        forgetst=findViewById(R.id.forgetpasswordtext);
-        wrongaccoutpass=findViewById(R.id.wrongaccontpass);
-
+        ButterKnife.bind(this);
 
         enterbtn.setOnClickListener(new View.OnClickListener() {
             @Override

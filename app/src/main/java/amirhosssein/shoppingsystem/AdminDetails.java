@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 public class AdminDetails extends AppCompatActivity {
 
 
-    Context context=this;
+    Context context = this;
 
     @BindView(R.id.admindetails_adminIDtv)
     TextView adminIDtv;
@@ -33,7 +33,7 @@ public class AdminDetails extends AppCompatActivity {
 
     Admin admin;
 
-    AdminDB adminDB=new AdminDB(context);
+    AdminDB adminDB = new AdminDB(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +42,13 @@ public class AdminDetails extends AppCompatActivity {
 
 
         ButterKnife.bind(this);
-        admin=adminDB.getAdminByID(getIntent().getIntExtra("adminID",0));
+        admin = adminDB.getAdminByID(getIntent().getIntExtra("adminID", 0));
 
 
-
-        String strgAdminID="شناسه کاربری : "+admin.getID();
+        String strgAdminID = "شناسه کاربری : " + admin.getID();
         adminIDtv.setText(strgAdminID);
 
-        String strgFullName=admin.getName()+" "+admin.getLastname();
+        String strgFullName = admin.getName() + " " + admin.getLastname();
         fullNametv.setText(strgFullName);
 
         mainAdminswch.setChecked(admin.isMainAdmin());
@@ -59,20 +58,19 @@ public class AdminDetails extends AppCompatActivity {
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Admin newAdmin=admin;
+                Admin newAdmin = admin;
                 newAdmin.setMainAdmin(mainAdminswch.isChecked());
                 newAdmin.setAcvive(isActiveswch.isChecked());
-                adminDB.update(newAdmin,admin.getID());
+                adminDB.update(newAdmin, admin.getID());
                 dialog();
             }
         });
 
 
-
     }
 
-    private void dialog(){
-        AlertDialog.Builder myAlertDialog=new AlertDialog.Builder(this);
+    private void dialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
         myAlertDialog.setTitle(getResources().getString(R.string.chengeisdone));
         myAlertDialog.setCancelable(false);
         myAlertDialog.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -82,7 +80,7 @@ public class AdminDetails extends AppCompatActivity {
             }
         });
 
-        final AlertDialog alertDialog=myAlertDialog.create();
+        final AlertDialog alertDialog = myAlertDialog.create();
         alertDialog.show();
     }
 

@@ -24,13 +24,20 @@ import amirhosssein.shoppingsystem.models.Carts;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.Orders;
 import amirhosssein.shoppingsystem.models.Ware;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CartForCus extends AppCompatActivity {
 
     Context context=this;
-    TextView finalOrderNumtv,finalSumtv;
+    @BindView(R.id.tottalityorderquntityshowtext)
+    TextView finalOrderNumtv;
+    @BindView(R.id.summorderpriceshowtext)
+    TextView finalSumtv;
+    @BindView(R.id.confirmCusCartButton)
     Button confirmCart;
     int finalOrderNum=0,finalSum=0;
+    @BindView(R.id.recy_cuscart)
     RecyclerView recyclerView;
     ArrayList<Orders> listOfWareInOrder;
     OrdersDB ordersDB=new OrdersDB(context);
@@ -50,9 +57,7 @@ public class CartForCus extends AppCompatActivity {
         listOfWareInOrder=ordersDB.getOrderByCartID(cartID);
 
         CartForCusAdaptor adaptor=new CartForCusAdaptor(listOfWareInOrder,context);
-        finalOrderNumtv=findViewById(R.id.tottalityorderquntityshowtext);
-        finalSumtv=findViewById(R.id.summorderpriceshowtext);
-        confirmCart=findViewById(R.id.confirmCusCartButton);
+        ButterKnife.bind(this);
 
         for (int i = 0; i <listOfWareInOrder.size() ; i++) {
             Orders orderforquantity=listOfWareInOrder.get(i);
@@ -62,7 +67,6 @@ public class CartForCus extends AppCompatActivity {
             finalSum+=price*orderforquantity.getQuantity();
         }
 
-        recyclerView=findViewById(R.id.recy_cuscart);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
 

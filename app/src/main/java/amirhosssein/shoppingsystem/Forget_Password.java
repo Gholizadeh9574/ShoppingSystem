@@ -14,11 +14,15 @@ import java.util.Random;
 
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Customer;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class Forget_Password extends AppCompatActivity {
 
     Context context=this;
+    @BindView(R.id.forget_accuntnametext)
     EditText accountNametext;
+    @BindView(R.id.forget_button)
     Button sendPass;
     CustomersDB customersDB=new CustomersDB(context);
 
@@ -27,8 +31,7 @@ public class Forget_Password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget__password);
 
-        accountNametext=findViewById(R.id.forget_accuntnametext);
-        sendPass=findViewById(R.id.forget_button);
+        ButterKnife.bind(this);
 
         sendPass.setOnClickListener(new View.OnClickListener() {
             @Override

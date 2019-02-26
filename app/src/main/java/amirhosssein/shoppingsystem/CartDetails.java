@@ -10,33 +10,43 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import amirhosssein.shoppingsystem.adaptor.CartDetailsAdaptor;
+import amirhosssein.shoppingsystem.database.CartsDB;
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.database.OrdersDB;
 import amirhosssein.shoppingsystem.models.Carts;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.Orders;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CartDetails extends AppCompatActivity {
 
     Context context=this;
-    TextView customerNametv,customerIDtv,customerAddresstv,customerPhonetv;
+    @BindView(R.id.cartdetails_customernametv)
+    TextView customerNametv;
+    @BindView(R.id.cartdetails_customerID)
+    TextView customerIDtv;
+    @BindView(R.id.cartdetails_customeraddresstv)
+    TextView customerAddresstv;
+    @BindView(R.id.cartdetails_customerphonetv)
+    TextView customerPhonetv;
+    @BindView(R.id.cartdetails_recyclerview)
     RecyclerView recyclerView;
     CartDetailsAdaptor adaptor;
     ArrayList<Orders> list;
     CustomersDB customersDB=new CustomersDB(context);
     OrdersDB ordersDB=new OrdersDB(context);
+    CartsDB cartsDB=new CartsDB(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_details);
-        Carts cart= (Carts) getIntent().getSerializableExtra("cart");
+        Carts cart=cartsDB.getCartbyCartID(getIntent().getIntExtra("cartID",0));
         int customerID=cart.getCustomerID();
-        customerNametv=findViewById(R.id.cartdetails_customernametv);
-        customerIDtv=findViewById(R.id.cartdetails_customerID);
-        customerAddresstv=findViewById(R.id.cartdetails_customeraddresstv);
-        customerPhonetv=findViewById(R.id.cartdetails_customerphonetv);
+
         Customer customer=customersDB.getCustomerByID(customerID);
+        ButterKnife.bind(this);
         customerNametv.setText(customer.getName()+" "+customer.getLastname());
         customerIDtv.setText("شناسه کاربری : "+customer.getID());
         customerAddresstv.setText("آدرس : "+customer.getAddress());
@@ -44,7 +54,6 @@ public class CartDetails extends AppCompatActivity {
 
         list=ordersDB.getOrderByCartID(cart.getID());
 
-        recyclerView=findViewById(R.id.cartdetails_recyclerview);
         adaptor=new CartDetailsAdaptor(list,context);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);

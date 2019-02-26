@@ -21,13 +21,22 @@ import java.util.ArrayList;
 import amirhosssein.shoppingsystem.database.WareDB;
 import amirhosssein.shoppingsystem.database.WareGroupDB;
 import amirhosssein.shoppingsystem.models.Ware;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class NewWare extends AppCompatActivity {
 
     Context context=this;
 
-    EditText wareNametext,wareParice,wareStock;
+    @BindView(R.id.newware_warenametext)
+    EditText wareNametext;
+    @BindView(R.id.newware_warepricetext)
+    EditText wareParice;
+    @BindView(R.id.newware_stoktext)
+    EditText wareStock;
+    @BindView(R.id.newware_spinnerforGW)
     Spinner spinner;
+    @BindView(R.id.newware_savewarebutton)
     Button saveWarebtn;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
@@ -40,15 +49,9 @@ public class NewWare extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ware);
 
-        wareNametext=findViewById(R.id.newware_warenametext);
-        wareParice=findViewById(R.id.newware_warepricetext);
-        wareStock=findViewById(R.id.newware_stoktext);
-        saveWarebtn=findViewById(R.id.newware_savewarebutton);
+        ButterKnife.bind(this);
 
         list=wareGroupDB.getAllWareGroupName();
-
-        spinner=findViewById(R.id.newware_spinnerforGW);
-
         adapter=new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -69,7 +72,7 @@ public class NewWare extends AppCompatActivity {
 
                                 wareDB.insert(ware);
 
-//                                dialog();
+                                dialog();
 
                             }
                             else{

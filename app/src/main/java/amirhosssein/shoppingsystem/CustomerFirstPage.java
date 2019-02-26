@@ -23,10 +23,13 @@ import amirhosssein.shoppingsystem.database.WareGroupDB;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
 import amirhosssein.shoppingsystem.models.Ware;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CustomerFirstPage extends AppCompatActivity {
 
     Context context=this;
+    @BindView(R.id.cuswarerecycler)
     RecyclerView recyclerView;
     ArrayList<Ware> wareList;
     CusWareRecyclerAdaptor recAdapter;
@@ -80,7 +83,7 @@ public class CustomerFirstPage extends AppCompatActivity {
         customer=customersDB.getCustomerByID(enterCusID);
         wareGroupNames=wareGroupDB.getAllWareGroupName();
         wareList=wareDB.getAllWaresforCus();
-        recyclerView=findViewById(R.id.cuswarerecycler);
+        ButterKnife.bind(this);
         recAdapter =new CusWareRecyclerAdaptor(wareList,context);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(recAdapter);
@@ -107,7 +110,7 @@ public class CustomerFirstPage extends AppCompatActivity {
                         Ware ware =wareList.get(position);
                         Intent intent=new Intent(CustomerFirstPage.this , SingleOrder.class);
                         intent.putExtra("customerID",customer.getID());
-                        intent.putExtra("ware",ware);
+                        intent.putExtra("wareID",ware.getID());
                         startActivity(intent);
                     }
                 });

@@ -16,14 +16,28 @@ import android.widget.Toast;
 
 import amirhosssein.shoppingsystem.database.AdminDB;
 import amirhosssein.shoppingsystem.models.Admin;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class NewAdmin extends AppCompatActivity {
 
     Context context=this;
 
-    TextView newAdminIDtv , passERROR;
-    EditText adminNametext,adminLastNametext, passtext, repasstext;
+    @BindView(R.id.newadmin_adminIDtv)
+    TextView newAdminIDtv;
+    @BindView(R.id.newadmin_passerrortv)
+    TextView passERROR;
+    @BindView(R.id.newadmin_adminnametext)
+    EditText adminNametext;
+    @BindView(R.id.newadmin_adminlastnametext)
+    TextView adminLastNametext;
+    @BindView(R.id.newadmin_passtext)
+    TextView passtext;
+    @BindView(R.id.newadmin_repasstext)
+    TextView repasstext;
+    @BindView(R.id.newadmin_mainadminswitch)
     Switch mainSwitch;
+    @BindView(R.id.newadmin_saveadminbtn)
     Button saveButton;
 
     int adminID;
@@ -35,14 +49,7 @@ public class NewAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_admin);
 
-        newAdminIDtv=findViewById(R.id.newadmin_adminIDtv);
-        passERROR=findViewById(R.id.newadmin_passerrortv);
-        adminNametext=findViewById(R.id.newadmin_adminnametext);
-        adminLastNametext=findViewById(R.id.newadmin_adminlastnametext);
-        mainSwitch=findViewById(R.id.newadmin_mainadminswitch);
-        passtext =findViewById(R.id.newadmin_passtext);
-        repasstext =findViewById(R.id.newadmin_repasstext);
-        saveButton=findViewById(R.id.newadmin_saveadminbtn);
+        ButterKnife.bind(this);
 
         adminID=adminDB.getNewAdminID();
 

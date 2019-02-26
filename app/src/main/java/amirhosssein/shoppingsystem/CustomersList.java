@@ -14,10 +14,13 @@ import amirhosssein.shoppingsystem.adaptor.CustomerListAdaptor;
 import amirhosssein.shoppingsystem.database.CustomersDB;
 import amirhosssein.shoppingsystem.models.Customer;
 import amirhosssein.shoppingsystem.models.OnItemClickListener;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CustomersList extends AppCompatActivity {
 
     Context context=this;
+    @BindView(R.id.customerlistrecy)
     RecyclerView recyclerView;
     CustomerListAdaptor adaptor;
     List<Customer> list;
@@ -28,7 +31,7 @@ public class CustomersList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         list=customersDB.getAllCustomers();
-        recyclerView=findViewById(R.id.customerlistrecy);
+        ButterKnife.bind(this);
         adaptor=new CustomerListAdaptor(list,context);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adaptor);
@@ -38,7 +41,7 @@ public class CustomersList extends AppCompatActivity {
             public void onItemClick(View view, int position, Object data) {
                 Customer customer=list.get(position);
                 Intent intent =new Intent(context,CustomerDetails.class);
-                intent.putExtra("customer",customer);
+                intent.putExtra("customerID",customer.getID());
                 startActivity(intent);
             }
         });
