@@ -29,6 +29,7 @@ public class WareDB {
         db = myDatabaseHelper.getReadableDatabase();
     }
 
+    
     private void closeDatabase() {
         if (db != null)
             db.close();
